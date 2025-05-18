@@ -21,8 +21,10 @@ public partial class Program
         string tgt = await client.GetTGTAsync();
         Console.WriteLine("TGT: " + tgt);
 
-        // TODO: get today
-        string todayDate = "2025-05-18T00:00:00+03:00";
+        var todayStart = DateTimeOffset.Now
+            .ToOffset(TimeSpan.FromHours(3))
+            .Date;
+        string todayDate = todayStart.ToString("yyyy-MM-ddTHH:mm:sszzz");
         string rawTxHist = await client.GetTransactionHistoryAsync(todayDate, todayDate, tgt);
 
         // Console.WriteLine(rawTxHist);
