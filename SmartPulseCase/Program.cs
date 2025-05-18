@@ -31,6 +31,10 @@ public partial class Program
 
         TransactionHistory? txHist = JsonSerializer.Deserialize<TransactionHistory>(rawTxHist);
 
+        if (txHist == null) {
+            throw new Exception("Transaction history is not valid");
+        }
+
         var groups = txHist.items.GroupBy(tx => tx.contractName);
 
         var table = new ConsoleTable("Tarih", "Toplam İşlem Tutarı", "Toplam İşlem Miktarı", "Ağırlıklı Ortalama Fiyat");
